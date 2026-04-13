@@ -145,13 +145,13 @@
   <h1>속지 않는 연습,<br>오늘 1분만 해볼까요?</h1>
   <p class="lead">전화·문자·카톡으로 오는 사기를 안전한 환경에서 미리 체험해봅니다. 진짜 돈이 오가지 않습니다.</p>
 
-  <button class="btn primary" onclick="go('screen-sim1-call')">▶ 연습 시작하기</button>
+  <button class="btn primary" onclick="startScenario('phone')">▶ 연습 시작하기</button>
 
   <h2>종류별로 해보기</h2>
   <div class="grid2">
-    <button class="btn" onclick="go('screen-sim1-call')">📞 전화</button>
-    <button class="btn" onclick="alert('곧 공개돼요')">💬 문자</button>
-    <button class="btn" onclick="alert('곧 공개돼요')">📱 카톡</button>
+    <button class="btn" onclick="startScenario('phone')">📞 전화</button>
+    <button class="btn" onclick="startScenario('sms')">💬 문자</button>
+    <button class="btn" onclick="startScenario('kakao')">📱 카톡</button>
     <button class="btn" onclick="alert('곧 공개돼요')">🔗 링크</button>
   </div>
 
@@ -161,84 +161,48 @@
   </div>
 </section>
 
-<!-- 화면 2: 전화 걸려옴 -->
-<section id="screen-sim1-call" class="hidden">
+<!-- 화면 2: 시나리오 인트로 (전화 걸려옴 / 문자 도착 / 카톡 도착) -->
+<section id="screen-intro" class="hidden">
   <button class="back-link" onclick="go('screen-home')">← 처음으로</button>
-  <h2>📞 전화 연습 · 검찰사칭</h2>
+  <h2 id="intro-title"></h2>
   <span class="safe-tag">모두 가짜입니다. 안전해요.</span>
-
-  <div class="phone">
-    <div class="icon">📞</div>
-    <div class="caller">서울중앙지방검찰청</div>
-    <div class="number">02-3480-2000</div>
-    <div class="label">발신표시는 조작될 수 있어요</div>
-  </div>
-
-  <div class="grid2">
-    <button class="btn" onclick="go('screen-home')">❌ 거절</button>
-    <button class="btn primary" onclick="go('screen-sim1-talk')">✅ 받기</button>
-  </div>
-  <p style="font-size:16px;color:var(--muted);text-align:center;margin-top:16px">
-    ※ 실전에서는 모르는 번호라면 받지 않아도 됩니다.
-  </p>
+  <div id="intro-stage"></div>
+  <div class="grid2" id="intro-actions"></div>
+  <p id="intro-hint" style="font-size:16px;color:var(--muted);text-align:center;margin-top:16px"></p>
 </section>
 
-<!-- 화면 3: 통화 중 + 선택 -->
-<section id="screen-sim1-talk" class="hidden">
-  <button class="back-link" onclick="go('screen-sim1-call')">← 뒤로</button>
-  <h2>통화 중</h2>
-  <div class="timer">00:12 통화 중</div>
-
-  <div class="bubble">
-    여보세요, 서울중앙지검 박민수 수사관입니다.
-    김순자 씨 명의로 개설된 통장이 범죄에 이용됐습니다.
-    지금 이 통화 내용을 다른 사람에게 말하면 <b>공범으로 처벌</b>됩니다.
-    안전계좌로 돈을 옮겨야 보호받을 수 있습니다…
-  </div>
-
+<!-- 화면 3: 질문 + 선택지 4개 -->
+<section id="screen-question" class="hidden">
+  <button class="back-link" onclick="go('screen-intro')">← 뒤로</button>
+  <h2 id="q-title"></h2>
+  <div id="q-meta" class="timer"></div>
+  <div class="bubble" id="q-bubble"></div>
   <h2>지금 어떻게 하시겠어요?</h2>
-  <button class="btn" onclick="answer(1)">① 시키는 대로 듣는다</button>
-  <button class="btn" onclick="answer(2)">② "가족과 의논하고 다시 걸겠다"</button>
-  <button class="btn" onclick="answer(3)">③ 그냥 끊는다</button>
-  <button class="btn" onclick="answer(4)">④ 진짜 검찰인지 확인해본다</button>
+  <div id="q-choices"></div>
 </section>
 
 <!-- 화면 4: 피드백 -->
 <section id="screen-feedback" class="hidden">
   <h2 id="fb-title">피드백</h2>
   <div class="bubble" id="fb-body"></div>
-
-  <div class="card">
-    <strong>💡 핵심 원칙</strong>
-    <p>진짜 검찰·경찰·금감원은 <b>절대 전화로 돈을 요구하지 않습니다.</b></p>
-    <p>의심되면 세 문장만 기억하세요:</p>
-    <ol>
-      <li>"가족과 의논하고 다시 걸겠습니다."</li>
-      <li>"그 번호 제가 다시 확인해서 걸겠습니다."</li>
-      <li>"끊겠습니다." (이유를 댈 필요 없음)</li>
-    </ol>
-  </div>
-
+  <div class="card" id="fb-principle"></div>
   <button class="btn primary" onclick="showResult()">결과 보기 ▶</button>
 </section>
 
 <!-- 화면 5: 결과 -->
 <section id="screen-result" class="hidden">
   <h1 style="text-align:center">🏆 오늘의 멈춤연습</h1>
-  <div class="result-num" id="res-score">1 / 1</div>
+  <div class="result-num" id="res-score">0 / 0</div>
   <div class="result-label" id="res-label">잘 멈추셨어요!</div>
 
-  <div class="card">
-    <strong>📞 전화 연습</strong>
-    <p id="res-detail">검찰사칭 시나리오: <b id="res-mark">✅</b></p>
-  </div>
+  <div class="card" id="res-detail"></div>
 
   <div class="card">
-    <strong>💡 다음에 더 연습할 것</strong>
-    <p>스미싱(택배·과태료 문자), 메신저피싱("엄마 나야" 카톡), AI 음성복제 사칭</p>
+    <strong>💡 남은 연습</strong>
+    <p id="res-next">다른 시나리오도 이어서 해보세요.</p>
   </div>
 
-  <button class="btn primary" onclick="go('screen-home')">🔁 다시 연습하기</button>
+  <button class="btn primary" onclick="goHome()">🔁 처음으로</button>
   <button class="btn" onclick="shareResult()">📄 가족에게 공유하기</button>
 
   <div class="footer-note">
@@ -251,45 +215,186 @@
 </main>
 
 <script>
-  let lastAnswer = null;
+  const SCENARIOS = {
+    phone: {
+      icon: '📞',
+      label: '전화 연습 · 검찰사칭',
+      intro: {
+        stage: `<div class="phone">
+          <div class="icon">📞</div>
+          <div class="caller">서울중앙지방검찰청</div>
+          <div class="number">02-3480-2000</div>
+          <div class="label">발신표시는 조작될 수 있어요</div>
+        </div>`,
+        actionLeft: { text: '❌ 거절', action: 'home' },
+        actionRight: { text: '✅ 받기', action: 'question' },
+        hint: '※ 실전에서는 모르는 번호라면 받지 않아도 됩니다.'
+      },
+      question: {
+        title: '통화 중',
+        meta: '00:12 통화 중',
+        bubble: `여보세요, 서울중앙지검 박민수 수사관입니다. 김순자 씨 명의로 개설된 통장이 범죄에 이용됐습니다. 지금 이 통화 내용을 다른 사람에게 말하면 <b>공범으로 처벌</b>됩니다. 안전계좌로 돈을 옮겨야 보호받을 수 있습니다…`,
+        choices: [
+          { text: '① 시키는 대로 듣는다', ok: false, title: '⚠️ 위험했어요', body: '<b>시키는 대로 하면 안 돼요.</b><br>"말하지 마세요", "안전계좌로 옮기세요" 이 두 말이 나오면 100% 사기입니다. 그냥 끊으세요.' },
+          { text: '② "가족과 의논하고 다시 걸겠다"', ok: true, title: '✅ 좋은 선택이에요', body: '<b>"가족과 의논하고 다시 걸겠다"</b><br>이 한 문장이 많은 분의 돈을 지켰습니다. 수사관이 화를 내도 괜찮습니다 — 진짜 수사관이라면 기다려줍니다.' },
+          { text: '③ 그냥 끊는다', ok: true, title: '✅ 잘하셨어요!', body: '<b>그냥 끊기</b><br>진짜 검찰은 전화로 돈 이야기를 하지 않습니다. 끊는 것은 절대 무례한 일이 아닙니다.' },
+          { text: '④ 진짜 검찰인지 확인해본다', ok: false, title: '🤔 절반만 안전해요', body: '<b>확인은 좋지만 방법이 중요해요.</b><br>걸려온 번호로 다시 걸면 <u>같은 사기범</u>에게 연결됩니다. 공식 홈페이지에서 대표번호를 <b>새로 검색</b>해 걸어야 합니다.' }
+        ]
+      },
+      principle: `<strong>💡 핵심 원칙</strong>
+        <p>진짜 검찰·경찰·금감원은 <b>절대 전화로 돈을 요구하지 않습니다.</b></p>
+        <p>의심되면 세 문장만 기억하세요:</p>
+        <ol>
+          <li>"가족과 의논하고 다시 걸겠습니다."</li>
+          <li>"그 번호 제가 다시 확인해서 걸겠습니다."</li>
+          <li>"끊겠습니다." (이유를 댈 필요 없음)</li>
+        </ol>`
+    },
 
-  function go(id) {
+    sms: {
+      icon: '💬',
+      label: '문자 연습 · 택배 스미싱',
+      intro: {
+        stage: `<div class="card" style="background:#f0f0f0">
+          <div style="font-size:14px;color:#666;margin-bottom:6px">📩 방금 받은 문자</div>
+          <div style="font-weight:700;margin-bottom:8px">[CJ대한통운]</div>
+          <div style="line-height:1.6">주소 불일치로 배송이 <b>보류 중</b>입니다.<br>주소 확인 → <span style="color:#1f6feb;text-decoration:underline">http://cj-ko.delivery-r.top/2k9</span></div>
+        </div>`,
+        actionLeft: { text: '🗑️ 무시', action: 'question' },
+        actionRight: { text: '👆 링크 확인', action: 'question' },
+        hint: '※ 두 버튼 모두 연습용입니다. 실전에선 문자 속 링크는 누르지 마세요.'
+      },
+      question: {
+        title: '이 문자, 어떻게 보이세요?',
+        meta: '',
+        bubble: `도메인 주소가 <b>.top</b>으로 끝나고, 주문한 기억이 없는데 "보류 중"이라며 급하게 확인을 유도하고 있습니다.`,
+        choices: [
+          { text: '① 링크를 눌러 주소를 확인한다', ok: false, title: '⚠️ 악성앱이 깔려요', body: '<b>링크를 누르면 악성앱이 설치됩니다.</b><br>연락처가 통째로 털리고, 가족들에게 똑같은 사기문자가 뿌려집니다. 비행기모드 → 앱삭제 → 118 신고 순서로 대응하세요.' },
+          { text: '② CJ대한통운 공식 앱에서 직접 확인한다', ok: true, title: '✅ 완벽해요', body: '<b>공식 앱에서 직접 확인</b>이 가장 안전한 방법입니다. 진짜 택배사는 문자에 링크를 거의 넣지 않습니다.' },
+          { text: '③ 문자 길게 눌러 "스팸 신고"', ok: true, title: '✅ 훌륭해요', body: '<b>스팸 신고가 가장 빠릅니다.</b><br>나도 안전하고 다른 사람도 막을 수 있어요. 118(KISA)에도 추가 신고 가능.' },
+          { text: '④ 그냥 무시하고 지운다', ok: true, title: '✅ 안전합니다', body: '<b>무시도 정답입니다.</b><br>다만 가족 단톡방에 캡처를 공유해서 "우리 동네에 이런 문자 돌고 있어요"라고 알려주면 더 좋아요.' }
+        ]
+      },
+      principle: `<strong>💡 스미싱 판별 3단계</strong>
+        <p><b>① 누가 보냈나?</b> 모르는 번호 + 택배·과태료·청첩장</p>
+        <p><b>② 도메인이 무엇인가?</b> <code>.top .xyz .click .vip</code>로 끝나면 무조건 가짜</p>
+        <p><b>③ 내가 기다리던 것인가?</b> 기대 안 한 것이면 일단 멈추기</p>
+        <p style="margin-top:10px">📌 <b>핵심:</b> 택배사·국세청·경찰은 문자 속 링크로 업무를 보지 않습니다. 링크 누르기 전에 1분만 멈추세요.</p>`
+    },
+
+    kakao: {
+      icon: '📱',
+      label: '카톡 연습 · "엄마 나야"',
+      intro: {
+        stage: `<div class="card" style="background:#fee500;color:#111">
+          <div style="font-size:14px;margin-bottom:6px">💬 카카오톡</div>
+          <div style="font-weight:700;margin-bottom:8px">딸 (새 프로필)</div>
+          <div style="background:#fff;padding:12px;border-radius:10px;line-height:1.6">
+            엄마, 나야. 폰 떨어뜨려서 수리 맡겼어.<br>
+            지금 이 번호로만 연락돼. 급하게 결제할 게 있는데<br>
+            카드가 안 돼서… <b>100만원만 먼저 보내줄 수 있어?</b><br>
+            통화는 지금 못 해, 수리 중이야. 빨리 부탁해 😢
+          </div>
+        </div>`,
+        actionLeft: { text: '🤔 수상해', action: 'question' },
+        actionRight: { text: '😢 딸이 급한가봐', action: 'question' },
+        hint: '※ 두 버튼 모두 연습용입니다. 다음 화면에서 올바른 대응을 배웁니다.'
+      },
+      question: {
+        title: '카톡 받는 중',
+        meta: '💬 방금',
+        bubble: `"폰이 고장나서 통화는 못 한다"는 말이 나왔습니다. 프로필 사진은 딸과 똑같지만, 번호는 처음 보는 번호입니다.`,
+        choices: [
+          { text: '① 일단 100만원을 보낸다', ok: false, title: '⚠️ 가장 위험한 선택이에요', body: '<b>송금 직전이 마지막 멈춤 기회입니다.</b><br>"통화 못 한다"는 말이 나오면 100% 사기입니다. 이미 보내셨다면 즉시 112 → 지급정지 신청 → 30분 안에 조치하세요.' },
+          { text: '② 원래 알던 딸 번호로 전화 걸어본다', ok: true, title: '✅ 정답이에요', body: '<b>콜백 확인이 가장 강력한 방어입니다.</b><br>연락처에서 원래 번호를 찾아 직접 걸기. 진짜 딸이면 받고, 사기범은 받지 못합니다.' },
+          { text: '③ "우리 집 암호 뭐야?"라고 물어본다', ok: true, title: '✅ 훌륭해요', body: '<b>본인확인 암호는 AI도 뚫을 수 없습니다.</b><br>진짜 딸은 웃으면서 대답하고, 사기범은 말을 돌립니다. 가족끼리 미리 정해두세요.' },
+          { text: '④ 배우자나 다른 가족에게 먼저 확인한다', ok: true, title: '✅ 안전합니다', body: '<b>제3자 확인도 정답입니다.</b><br>"○○한테서 이런 카톡 왔는데 맞아?" 한 마디면 끝. 이게 가장 마음 편한 방법일 수 있어요.' }
+        ]
+      },
+      principle: `<strong>💡 메신저피싱 3단계 확인법</strong>
+        <p><b>① 전화 걸기:</b> 원래 알던 번호로 직접 전화</p>
+        <p><b>② 암호 묻기:</b> 가족만 아는 본인확인 암호 묻기</p>
+        <p><b>③ 제3자 확인:</b> 다른 가족에게 "맞아?" 물어보기</p>
+        <p style="margin-top:10px">📌 <b>핵심:</b> "통화 못 한다" + "돈 얘기" + "비밀로 해" 이 세 개 중 하나라도 나오면 사기입니다. 진짜 자식은 통화를 피하지 않아요.</p>`
+    }
+  };
+
+  let currentId = null;
+  let session = []; // {id, ok}
+
+  function el(id) { return document.getElementById(id); }
+
+  function go(screenId) {
     document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
-    document.getElementById(id).classList.remove('hidden');
+    el(screenId).classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
-  function answer(n) {
-    lastAnswer = n;
-    const title = document.getElementById('fb-title');
-    const body = document.getElementById('fb-body');
-    body.className = 'bubble';
+  function goHome() {
+    session = [];
+    currentId = null;
+    go('screen-home');
+  }
 
-    if (n === 3) {
-      title.textContent = '✅ 잘하셨어요!';
-      body.classList.add('feedback-ok');
-      body.innerHTML = '<b>그냥 끊기</b><br>진짜 검찰은 전화로 돈 이야기를 하지 않습니다. 끊는 것은 절대 무례한 일이 아닙니다.';
-    } else if (n === 2) {
-      title.textContent = '✅ 좋은 선택이에요';
-      body.classList.add('feedback-ok');
-      body.innerHTML = '<b>"가족과 의논하고 다시 걸겠다"</b><br>이 한 문장이 많은 분의 돈을 지켰습니다. 수사관이 화를 내도 괜찮습니다 — 진짜 수사관이라면 기다려줍니다.';
-    } else if (n === 4) {
-      title.textContent = '🤔 절반만 안전해요';
-      body.classList.add('feedback-bad');
-      body.innerHTML = '<b>확인은 좋지만 방법이 중요해요.</b><br>걸려온 번호로 다시 걸면 <u>같은 사기범</u>에게 연결됩니다. 공식 홈페이지에서 대표번호를 <b>새로 검색</b>해 걸어야 합니다.';
-    } else {
-      title.textContent = '⚠️ 위험했어요';
-      body.classList.add('feedback-bad');
-      body.innerHTML = '<b>시키는 대로 하면 안 돼요.</b><br>"말하지 마세요", "안전계좌로 옮기세요" 이 두 말이 나오면 100% 사기입니다. 그냥 끊으세요.';
-    }
+  function startScenario(id) {
+    currentId = id;
+    const s = SCENARIOS[id];
+    el('intro-title').textContent = `${s.icon} ${s.label}`;
+    el('intro-stage').innerHTML = s.intro.stage;
+    el('intro-actions').innerHTML = `
+      <button class="btn" onclick="handleIntroAction('${s.intro.actionLeft.action}')">${s.intro.actionLeft.text}</button>
+      <button class="btn primary" onclick="handleIntroAction('${s.intro.actionRight.action}')">${s.intro.actionRight.text}</button>
+    `;
+    el('intro-hint').textContent = s.intro.hint || '';
+    go('screen-intro');
+  }
+
+  function handleIntroAction(action) {
+    if (action === 'home') { goHome(); return; }
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const s = SCENARIOS[currentId];
+    el('q-title').textContent = s.question.title;
+    el('q-meta').textContent = s.question.meta || '';
+    el('q-bubble').innerHTML = s.question.bubble;
+    el('q-choices').innerHTML = s.question.choices.map((c, i) =>
+      `<button class="btn" onclick="answer(${i})">${c.text}</button>`
+    ).join('');
+    go('screen-question');
+  }
+
+  function answer(choiceIdx) {
+    const s = SCENARIOS[currentId];
+    const c = s.question.choices[choiceIdx];
+    session.push({ id: currentId, label: s.label, ok: c.ok });
+
+    el('fb-title').textContent = c.title;
+    const body = el('fb-body');
+    body.className = 'bubble ' + (c.ok ? 'feedback-ok' : 'feedback-bad');
+    body.innerHTML = c.body;
+    el('fb-principle').innerHTML = s.principle;
     go('screen-feedback');
   }
 
   function showResult() {
-    const good = (lastAnswer === 2 || lastAnswer === 3);
-    document.getElementById('res-score').textContent = good ? '1 / 1' : '0 / 1';
-    document.getElementById('res-label').textContent = good ? '잘 멈추셨어요!' : '한 번 더 연습해볼까요?';
-    document.getElementById('res-mark').textContent = good ? '✅' : '❌';
+    const total = session.length;
+    const good = session.filter(r => r.ok).length;
+    el('res-score').textContent = `${good} / ${total}`;
+    el('res-label').textContent = good === total ? '잘 멈추셨어요!' : '한 번 더 연습해볼까요?';
+
+    el('res-detail').innerHTML = '<strong>📋 오늘의 기록</strong>' +
+      session.map(r => `<p>${r.label}: <b>${r.ok ? '✅' : '❌'}</b></p>`).join('');
+
+    const doneIds = new Set(session.map(r => r.id));
+    const remaining = Object.keys(SCENARIOS).filter(k => !doneIds.has(k));
+    if (remaining.length > 0) {
+      const nextLabels = remaining.map(k => SCENARIOS[k].label).join(', ');
+      el('res-next').innerHTML = `아직 안 해본 시나리오: <b>${nextLabels}</b><br>처음으로 돌아가 이어서 해보세요.`;
+    } else {
+      el('res-next').textContent = '모든 시나리오를 완료했어요! 며칠 뒤 다시 와서 복습해보세요.';
+    }
     go('screen-result');
   }
 
@@ -303,7 +408,7 @@
     }
   }
 
-  document.getElementById('helpLink').addEventListener('click', (e) => {
+  el('helpLink').addEventListener('click', (e) => {
     e.preventDefault();
     alert('멈춤연습(stopcall.kr)은 스마택트가 만든 시니어 사이버안전 교육 서비스입니다.\n모든 시나리오는 가짜이며 진짜 돈이 오가지 않습니다.\n문의: hello@stopcall.kr');
   });
