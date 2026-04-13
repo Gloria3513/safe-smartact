@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>멈춤연습 · stopcall.kr</title>
+<meta name="description" content="stop call — 멈춰서 한 번 더 생각하는 연습. 시니어를 위한 사이버안전 시뮬레이터.">
+<meta property="og:title" content="멈춤연습 · stopcall.kr">
+<meta property="og:description" content="전화·문자·카톡 사기를 안전한 환경에서 체험해보세요.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stopcall.kr">
+<style>
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --brand: #1f6feb;
+    --danger: #c9302c;
+    --ok: #2e7d32;
+    --card: #ffffff;
+    --shadow: 0 2px 10px rgba(0,0,0,.06);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Pretendard", -apple-system, "Noto Sans KR", sans-serif;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+  }
+  header {
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e0d6;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header .logo { font-weight: 800; font-size: 22px; }
+  header .logo small { color: var(--muted); font-weight: 500; font-size: 14px; margin-left: 6px; }
+  header a { color: var(--brand); text-decoration: none; font-size: 16px; }
+  main { max-width: 640px; margin: 0 auto; padding: 24px 20px 60px; }
+  h1 { font-size: 32px; line-height: 1.3; margin: 18px 0 10px; }
+  h2 { font-size: 24px; margin: 28px 0 12px; }
+  p { margin: 10px 0; }
+  .lead { color: var(--muted); font-size: 20px; }
+  .btn {
+    display: block;
+    width: 100%;
+    min-height: 72px;
+    padding: 18px 22px;
+    margin: 14px 0;
+    font-size: 22px;
+    font-weight: 700;
+    border: 2px solid #111;
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .btn:hover, .btn:focus { background: #fffbe6; outline: 3px solid #ffd54f; }
+  .btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); text-align: center; font-size: 24px; }
+  .btn.primary:hover { background: #1558c4; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid2 .btn { margin: 0; text-align: center; font-size: 19px; }
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow);
+    margin: 18px 0;
+  }
+  .phone {
+    background: #111;
+    color: #fff;
+    border-radius: 22px;
+    padding: 28px 22px;
+    text-align: center;
+    margin: 18px 0;
+  }
+  .phone .caller { font-size: 22px; font-weight: 700; margin: 8px 0 4px; }
+  .phone .number { font-size: 18px; color: #9bd; }
+  .phone .label { font-size: 14px; color: #bbb; margin-top: 6px; }
+  .phone .icon { font-size: 56px; margin: 8px 0; }
+  .bubble {
+    background: #fffbe6;
+    border-left: 5px solid #ffb300;
+    padding: 16px 18px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 14px 0;
+  }
+  .bubble::before { content: "📢 "; }
+  .feedback-ok { background: #e8f5e9; border-left-color: var(--ok); }
+  .feedback-ok::before { content: "✅ "; }
+  .feedback-bad { background: #fdecea; border-left-color: var(--danger); }
+  .feedback-bad::before { content: "⚠️ "; }
+  .timer { font-size: 16px; color: #bbb; text-align: center; }
+  .footer-note {
+    font-size: 14px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px solid #e5e0d6;
+  }
+  .safe-tag {
+    display: inline-block;
+    background: #e8f5e9;
+    color: var(--ok);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .hidden { display: none; }
+  .result-num { font-size: 64px; font-weight: 900; text-align: center; color: var(--brand); margin: 10px 0; }
+  .result-label { text-align: center; font-size: 22px; font-weight: 700; }
+  ol { padding-left: 22px; }
+  ol li { margin: 8px 0; font-size: 19px; }
+  .back-link { font-size: 16px; color: var(--brand); cursor: pointer; background: none; border: 0; padding: 8px 0; }
+  @media (max-width: 420px) {
+    body { font-size: 18px; }
+    h1 { font-size: 26px; }
+    .btn { font-size: 19px; min-height: 64px; }
+    .grid2 .btn { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🛡️ 멈춤연습 <small>stopcall.kr</small></div>
+  <a href="#" id="helpLink">도움말</a>
+</header>
+
+<main>
+
+<!-- 화면 1: 홈 -->
+<section id="screen-home">
+  <h1>속지 않는 연습,<br>오늘 1분만 해볼까요?</h1>
+  <p class="lead">전화·문자·카톡으로 오는 사기를 안전한 환경에서 미리 체험해봅니다. 진짜 돈이 오가지 않습니다.</p>
+
+  <button class="btn primary" onclick="go('screen-sim1-call')">▶ 연습 시작하기</button>
+
+  <h2>종류별로 해보기</h2>
+  <div class="grid2">
+    <button class="btn" onclick="go('screen-sim1-call')">📞 전화</button>
+    <button class="btn" onclick="alert('곧 공개돼요')">💬 문자</button>
+    <button class="btn" onclick="alert('곧 공개돼요')">📱 카톡</button>
+    <button class="btn" onclick="alert('곧 공개돼요')">🔗 링크</button>
+  </div>
+
+  <div class="card">
+    <strong>👨‍👩‍👧 가족·강사와 함께하기</strong>
+    <p style="font-size:17px;color:var(--muted);margin:8px 0 0">활동북 <b>속지 않는 하루</b>와 함께 쓰면 학습 효과가 두 배가 됩니다. 공공기관·복지관 문의 환영.</p>
+  </div>
+</section>
+
+<!-- 화면 2: 전화 걸려옴 -->
+<section id="screen-sim1-call" class="hidden">
+  <button class="back-link" onclick="go('screen-home')">← 처음으로</button>
+  <h2>📞 전화 연습 · 검찰사칭</h2>
+  <span class="safe-tag">모두 가짜입니다. 안전해요.</span>
+
+  <div class="phone">
+    <div class="icon">📞</div>
+    <div class="caller">서울중앙지방검찰청</div>
+    <div class="number">02-3480-2000</div>
+    <div class="label">발신표시는 조작될 수 있어요</div>
+  </div>
+
+  <div class="grid2">
+    <button class="btn" onclick="go('screen-home')">❌ 거절</button>
+    <button class="btn primary" onclick="go('screen-sim1-talk')">✅ 받기</button>
+  </div>
+  <p style="font-size:16px;color:var(--muted);text-align:center;margin-top:16px">
+    ※ 실전에서는 모르는 번호라면 받지 않아도 됩니다.
+  </p>
+</section>
+
+<!-- 화면 3: 통화 중 + 선택 -->
+<section id="screen-sim1-talk" class="hidden">
+  <button class="back-link" onclick="go('screen-sim1-call')">← 뒤로</button>
+  <h2>통화 중</h2>
+  <div class="timer">00:12 통화 중</div>
+
+  <div class="bubble">
+    여보세요, 서울중앙지검 박민수 수사관입니다.
+    김순자 씨 명의로 개설된 통장이 범죄에 이용됐습니다.
+    지금 이 통화 내용을 다른 사람에게 말하면 <b>공범으로 처벌</b>됩니다.
+    안전계좌로 돈을 옮겨야 보호받을 수 있습니다…
+  </div>
+
+  <h2>지금 어떻게 하시겠어요?</h2>
+  <button class="btn" onclick="answer(1)">① 시키는 대로 듣는다</button>
+  <button class="btn" onclick="answer(2)">② "가족과 의논하고 다시 걸겠다"</button>
+  <button class="btn" onclick="answer(3)">③ 그냥 끊는다</button>
+  <button class="btn" onclick="answer(4)">④ 진짜 검찰인지 확인해본다</button>
+</section>
+
+<!-- 화면 4: 피드백 -->
+<section id="screen-feedback" class="hidden">
+  <h2 id="fb-title">피드백</h2>
+  <div class="bubble" id="fb-body"></div>
+
+  <div class="card">
+    <strong>💡 핵심 원칙</strong>
+    <p>진짜 검찰·경찰·금감원은 <b>절대 전화로 돈을 요구하지 않습니다.</b></p>
+    <p>의심되면 세 문장만 기억하세요:</p>
+    <ol>
+      <li>"가족과 의논하고 다시 걸겠습니다."</li>
+      <li>"그 번호 제가 다시 확인해서 걸겠습니다."</li>
+      <li>"끊겠습니다." (이유를 댈 필요 없음)</li>
+    </ol>
+  </div>
+
+  <button class="btn primary" onclick="showResult()">결과 보기 ▶</button>
+</section>
+
+<!-- 화면 5: 결과 -->
+<section id="screen-result" class="hidden">
+  <h1 style="text-align:center">🏆 오늘의 멈춤연습</h1>
+  <div class="result-num" id="res-score">1 / 1</div>
+  <div class="result-label" id="res-label">잘 멈추셨어요!</div>
+
+  <div class="card">
+    <strong>📞 전화 연습</strong>
+    <p id="res-detail">검찰사칭 시나리오: <b id="res-mark">✅</b></p>
+  </div>
+
+  <div class="card">
+    <strong>💡 다음에 더 연습할 것</strong>
+    <p>스미싱(택배·과태료 문자), 메신저피싱("엄마 나야" 카톡), AI 음성복제 사칭</p>
+  </div>
+
+  <button class="btn primary" onclick="go('screen-home')">🔁 다시 연습하기</button>
+  <button class="btn" onclick="shareResult()">📄 가족에게 공유하기</button>
+
+  <div class="footer-note">
+    <p>🆘 실제로 송금하셨다면 즉시 <b>112</b> 또는 거래 은행에 <b>지급정지</b> 신청하세요.</p>
+    <p>KISA 사이버범죄 신고 ☎ <b>118</b> · 금융감독원 ☎ <b>1332</b></p>
+    <p style="margin-top:14px">© 스마택트 · stopcall.kr · 디지털포용법 기반 시니어 사이버안전 교육</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+  let lastAnswer = null;
+
+  function go(id) {
+    document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function answer(n) {
+    lastAnswer = n;
+    const title = document.getElementById('fb-title');
+    const body = document.getElementById('fb-body');
+    body.className = 'bubble';
+
+    if (n === 3) {
+      title.textContent = '✅ 잘하셨어요!';
+      body.classList.add('feedback-ok');
+      body.innerHTML = '<b>그냥 끊기</b><br>진짜 검찰은 전화로 돈 이야기를 하지 않습니다. 끊는 것은 절대 무례한 일이 아닙니다.';
+    } else if (n === 2) {
+      title.textContent = '✅ 좋은 선택이에요';
+      body.classList.add('feedback-ok');
+      body.innerHTML = '<b>"가족과 의논하고 다시 걸겠다"</b><br>이 한 문장이 많은 분의 돈을 지켰습니다. 수사관이 화를 내도 괜찮습니다 — 진짜 수사관이라면 기다려줍니다.';
+    } else if (n === 4) {
+      title.textContent = '🤔 절반만 안전해요';
+      body.classList.add('feedback-bad');
+      body.innerHTML = '<b>확인은 좋지만 방법이 중요해요.</b><br>걸려온 번호로 다시 걸면 <u>같은 사기범</u>에게 연결됩니다. 공식 홈페이지에서 대표번호를 <b>새로 검색</b>해 걸어야 합니다.';
+    } else {
+      title.textContent = '⚠️ 위험했어요';
+      body.classList.add('feedback-bad');
+      body.innerHTML = '<b>시키는 대로 하면 안 돼요.</b><br>"말하지 마세요", "안전계좌로 옮기세요" 이 두 말이 나오면 100% 사기입니다. 그냥 끊으세요.';
+    }
+    go('screen-feedback');
+  }
+
+  function showResult() {
+    const good = (lastAnswer === 2 || lastAnswer === 3);
+    document.getElementById('res-score').textContent = good ? '1 / 1' : '0 / 1';
+    document.getElementById('res-label').textContent = good ? '잘 멈추셨어요!' : '한 번 더 연습해볼까요?';
+    document.getElementById('res-mark').textContent = good ? '✅' : '❌';
+    go('screen-result');
+  }
+
+  function shareResult() {
+    const text = '오늘 멈춤연습을 해봤어요. stopcall.kr 에서 같이 해봐요.';
+    if (navigator.share) {
+      navigator.share({ title: '멈춤연습', text, url: location.href }).catch(()=>{});
+    } else {
+      navigator.clipboard?.writeText(text + ' ' + location.href);
+      alert('공유 문구를 복사했어요. 가족 단톡방에 붙여넣어 주세요.');
+    }
+  }
+
+  document.getElementById('helpLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    alert('멈춤연습(stopcall.kr)은 스마택트가 만든 시니어 사이버안전 교육 서비스입니다.\n모든 시나리오는 가짜이며 진짜 돈이 오가지 않습니다.\n문의: hello@stopcall.kr');
+  });
+</script>
+</body>
+</html>
