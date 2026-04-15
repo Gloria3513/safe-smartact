@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>활동북 · 멈춤연습</title>
+<meta name="description" content="속지 않는 하루 — 시니어 사이버안전 활동북 9장 시리즈">
+<style>
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --brand: #1a1a1a;
+    --shadow: 0 4px 18px rgba(0,0,0,.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Pretendard", -apple-system, "Noto Sans KR", sans-serif;
+    font-size: 19px;
+    line-height: 1.75;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  header {
+    padding: 16px 22px;
+    background: white;
+    border-bottom: 1px solid #e5e0d6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; top: 0; z-index: 10;
+  }
+  header .logo { font-weight: 800; font-size: 18px; }
+  header .logo small { color: var(--muted); font-size: 12px; margin-left: 4px; }
+  header a {
+    color: var(--ink);
+    background: #fffbe6;
+    border: 2px solid #ffb300;
+    border-radius: 99px;
+    padding: 6px 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 30px 22px 80px; }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  .nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  .nav a:hover { background: #fffbe6; }
+  .nav .center { font-size: 14px; color: var(--muted); font-weight: 600; }
+  .nav a.disabled { color: #ccc; pointer-events: none; }
+
+  #content {
+    background: white;
+    border-radius: 18px;
+    padding: 36px 30px;
+    box-shadow: var(--shadow);
+  }
+
+  /* 마크다운 렌더 결과 스타일 */
+  #content h1 {
+    font-size: 32px;
+    line-height: 1.25;
+    margin: 0 0 20px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid #1a1a1a;
+  }
+  #content h2 {
+    font-size: 24px;
+    margin: 36px 0 12px;
+    line-height: 1.3;
+  }
+  #content h3 {
+    font-size: 20px;
+    margin: 24px 0 10px;
+  }
+  #content p, #content li { font-size: 18px; line-height: 1.8; }
+  #content blockquote {
+    border-left: 5px solid #ffb300;
+    background: #fffbe6;
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  #content blockquote p { margin: 0; }
+  #content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: 16px;
+  }
+  #content th, #content td {
+    border: 1px solid #e5e0d6;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  #content th { background: #f7f4ee; font-weight: 700; }
+  #content code {
+    background: #f0ede5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: "SF Mono", Menlo, monospace;
+  }
+  #content pre {
+    background: #1a1a1a;
+    color: #f7f4ee;
+    padding: 16px 18px;
+    border-radius: 10px;
+    overflow-x: auto;
+    line-height: 1.5;
+    font-size: 15px;
+  }
+  #content pre code { background: transparent; color: inherit; padding: 0; }
+  #content hr { border: 0; border-top: 1px solid #e5e0d6; margin: 30px 0; }
+  #content ul, #content ol { padding-left: 26px; }
+  #content li { margin: 6px 0; }
+  #content a { color: #1F6FEB; }
+
+  .loading { text-align: center; color: var(--muted); padding: 60px 0; }
+  .error {
+    background: #fdecea;
+    border-left: 5px solid #c9302c;
+    padding: 18px;
+    border-radius: 10px;
+    color: #c9302c;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 30px 0;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 480px) {
+    body { font-size: 17px; }
+    main { padding: 20px 14px 60px; }
+    #content { padding: 24px 18px; }
+    #content h1 { font-size: 26px; }
+    #content h2 { font-size: 21px; }
+    #content p, #content li { font-size: 17px; }
+    .nav { padding: 10px 14px; flex-wrap: wrap; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🛡️ 멈춤연습 <small>stopcall.kr</small></div>
+  <a href="/library.html">← 목차</a>
+</header>
+
+<main>
+
+  <div class="nav">
+    <a id="prev" href="#">← 이전</a>
+    <div class="center" id="center">활동북</div>
+    <a id="next" href="#">다음 →</a>
+  </div>
+
+  <article id="content">
+    <div class="loading">불러오는 중…</div>
+  </article>
+
+  <div class="nav" style="margin-top:24px">
+    <a id="prev2" href="#">← 이전</a>
+    <a href="/library.html" style="background:#1a1a1a;color:white">📚 목차</a>
+    <a id="next2" href="#">다음 →</a>
+  </div>
+
+  <footer>
+    © 스마택트 · stopcall.kr · 디지털포용법 기반 시니어 사이버안전 교육
+  </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  const CHAPTERS = {
+    1: { file: 'docs/workbook_ch1_stop5_routine.md',  title: '1장. 멈춤 5초' },
+    2: { file: 'docs/workbook_ch2_smishing.md',       title: '2장. 보이스피싱·스미싱' },
+    3: { file: 'docs/workbook_ch3_messenger.md',      title: '3장. 메신저피싱' },
+    4: { file: 'docs/workbook_ch4_romance.md',        title: '4장. 로맨스·몸캠스캠' },
+    5: { file: 'docs/workbook_ch5_ai_voice.md',       title: '5장. AI 음성복제' },
+    6: { file: 'docs/workbook_ch6_deepfake_video.md', title: '6장. 딥페이크 영상통화' },
+    7: { file: 'docs/workbook_ch7_investment_scam.md',title: '7장. 리딩방·코인 사기' },
+    8: { file: 'docs/workbook_ch8_health_product.md', title: '8장. 건강식품·홈쇼핑' },
+    9: { file: 'docs/workbook_ch9_fake_welfare.md',   title: '9장. 가짜 정부지원금' }
+  };
+
+  const params = new URLSearchParams(location.search);
+  const ch = parseInt(params.get('ch') || '1');
+  const meta = CHAPTERS[ch];
+  const content = document.getElementById('content');
+
+  if (!meta) {
+    content.innerHTML = '<div class="error">존재하지 않는 장입니다. <a href="/library.html">목차로 돌아가기</a></div>';
+  } else {
+    document.title = `${meta.title} · 멈춤연습`;
+    document.getElementById('center').textContent = `${meta.title} · ${ch}/9`;
+
+    const setNav = (id, target) => {
+      const a = document.getElementById(id);
+      if (target && CHAPTERS[target]) {
+        a.href = `?ch=${target}`;
+      } else {
+        a.classList.add('disabled');
+        a.removeAttribute('href');
+      }
+    };
+    setNav('prev', ch - 1); setNav('prev2', ch - 1);
+    setNav('next', ch + 1); setNav('next2', ch + 1);
+
+    fetch('/' + meta.file)
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(md => { content.innerHTML = marked.parse(md); window.scrollTo(0,0); })
+      .catch(e => {
+        content.innerHTML = `<div class="error">불러오기 실패 (${e.message}).<br>경로: <code>${meta.file}</code></div>`;
+      });
+  }
+</script>
+</body>
+</html>

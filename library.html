@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>자료실 · 멈춤연습</title>
+<meta name="description" content="활동북 9장, 강사 자료, 인쇄 자산 — 멈춤연습 자료실">
+<style>
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --s1: #E63946;
+    --s2: #F4A261;
+    --s3: #1F6FEB;
+    --s4: #2E7D32;
+    --s5: #6A4C93;
+    --shadow: 0 4px 18px rgba(0,0,0,.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Pretendard", -apple-system, "Noto Sans KR", sans-serif;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  header {
+    padding: 16px 22px;
+    background: white;
+    border-bottom: 1px solid #e5e0d6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; top: 0; z-index: 10;
+  }
+  header .logo { font-weight: 800; font-size: 18px; }
+  header .logo small { color: var(--muted); font-size: 12px; margin-left: 4px; }
+  header a {
+    color: var(--ink);
+    background: #fffbe6;
+    border: 2px solid #ffb300;
+    border-radius: 99px;
+    padding: 6px 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 30px 22px 80px; }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .hero .eyebrow {
+    display: inline-block;
+    background: #1a1a1a;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 900;
+    margin: 0 0 10px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin: 40px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2 .num {
+    background: #1a1a1a;
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .ch-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--ink);
+    border-left: 8px solid;
+    display: grid;
+    grid-template-columns: 60px 1fr 24px;
+    align-items: center;
+    gap: 14px;
+    transition: transform .1s;
+  }
+  .ch-card:hover { transform: translateX(4px); }
+  .ch-card .n {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+  }
+  .ch-card .t { font-size: 19px; font-weight: 800; }
+  .ch-card .d { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .ch-card .arr { font-size: 22px; color: var(--muted); }
+
+  .c1 { border-color: var(--s1); } .c1 .n { color: var(--s1); }
+  .c2 { border-color: var(--s2); } .c2 .n { color: var(--s2); }
+  .c3 { border-color: var(--s3); } .c3 .n { color: var(--s3); }
+  .c4 { border-color: var(--s4); } .c4 .n { color: var(--s4); }
+  .c5 { border-color: var(--s5); } .c5 .n { color: var(--s5); }
+  .c6 { border-color: var(--s1); } .c6 .n { color: var(--s1); }
+  .c7 { border-color: var(--s2); } .c7 .n { color: var(--s2); }
+  .c8 { border-color: var(--s3); } .c8 .n { color: var(--s3); }
+  .c9 { border-color: var(--s4); } .c9 .n { color: var(--s4); }
+
+  .res-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .res-card .icon { font-size: 30px; }
+  .res-card .t { font-size: 18px; font-weight: 800; }
+  .res-card .d { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .res-card .arr { margin-left: auto; color: var(--muted); font-size: 20px; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid #e5e0d6;
+  }
+
+  @media (max-width: 480px) {
+    body { font-size: 17px; }
+    .hero h1 { font-size: 28px; }
+    h2 { font-size: 21px; }
+    .ch-card { grid-template-columns: 48px 1fr 20px; padding: 14px 16px; }
+    .ch-card .n { font-size: 28px; }
+    .ch-card .t { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🛡️ 멈춤연습 <small>stopcall.kr</small></div>
+  <a href="/">← 메인</a>
+</header>
+
+<main>
+
+  <div class="hero">
+    <div class="eyebrow">자료실 · LIBRARY</div>
+    <h1>속지 않는 하루</h1>
+    <p>활동북 9장 · 강사 자료 · 인쇄 자산</p>
+  </div>
+
+  <h2><span class="num">📚</span>활동북 1부 — 사기의 9가지 얼굴</h2>
+
+  <div class="grid">
+    <a class="ch-card c1" href="/chapter.html?ch=1">
+      <div class="n">1</div>
+      <div>
+        <div class="t">멈춤 5초 — 모든 안전의 출발점</div>
+        <div class="d">5단계 손가락 루틴 · 본인확인 암호 · 멈춤 일기</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="ch-card c2" href="/chapter.html?ch=2">
+      <div class="n">2</div>
+      <div>
+        <div class="t">보이스피싱·스미싱</div>
+        <div class="d">검찰·경찰·금감원 사칭 + 택배문자</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="ch-card c3" href="/chapter.html?ch=3">
+      <div class="n">3</div>
+      <div>
+        <div class="t">메신저피싱</div>
+        <div class="d">"엄마 나야" 자녀 사칭 카톡</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="ch-card c4" href="/chapter.html?ch=4">
+      <div class="n">4</div>
+      <div>
+        <div class="t">로맨스·몸캠스캠</div>
+        <div class="d">외로움을 노리는 감정 사기</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="ch-card c5" href="/chapter.html?ch=5">
+      <div class="n">5</div>
+      <div>
+        <div class="t">AI 음성복제</div>
+        <div class="d">3초 목소리로 가족을 흉내내는 시대</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="ch-card c6" href="/chapter.html?ch=6">
+      <div class="n">6</div>
+      <div>
+        <div class="t">딥페이크 영상통화</div>
+        <div class="d">화면 속 얼굴마저 가짜 · 물리 검증 3종 세트</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="ch-card c7" href="/chapter.html?ch=7">
+      <div class="n">7</div>
+      <div>
+        <div class="t">리딩방·코인 투자 사기</div>
+        <div class="d">"확실한 투자"의 함정과 출금 정지</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="ch-card c8" href="/chapter.html?ch=8">
+      <div class="n">8</div>
+      <div>
+        <div class="t">건강식품·홈쇼핑 과장광고</div>
+        <div class="d">흰 가운의 권위와 자동결제 함정</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="ch-card c9" href="/chapter.html?ch=9">
+      <div class="n">9</div>
+      <div>
+        <div class="t">가짜 정부지원금·복지 사기</div>
+        <div class="d">"어르신만 받을 수 있는 혜택"의 진실</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+  </div>
+
+  <h2><span class="num">👨‍🏫</span>강사·복지관 자료</h2>
+
+  <div class="grid">
+    <a class="res-card" href="https://github.com/Gloria3513/safe-smartact/blob/main/docs/stop5_brand_core.md" target="_blank">
+      <div class="icon">📖</div>
+      <div>
+        <div class="t">브랜드 코어 (Brand Bible)</div>
+        <div class="d">5단계 정의·컬러·금지표현·슬로건</div>
+      </div>
+      <div class="arr">↗</div>
+    </a>
+    <a class="res-card" href="https://github.com/Gloria3513/safe-smartact/blob/main/docs/stop5_trainer_guide.md" target="_blank">
+      <div class="icon">🎓</div>
+      <div>
+        <div class="t">강사 50분 지도안</div>
+        <div class="d">복지관·경로당·평생교육원용 강의 진행 가이드</div>
+      </div>
+      <div class="arr">↗</div>
+    </a>
+    <a class="res-card" href="https://github.com/Gloria3513/safe-smartact/blob/main/docs/stop5_song_and_gesture.md" target="_blank">
+      <div class="icon">🎵</div>
+      <div>
+        <div class="t">챈트·노래·손동작 가이드</div>
+        <div class="d">트로트풍 노래 가사 + 5단계 손동작 명세</div>
+      </div>
+      <div class="arr">↗</div>
+    </a>
+    <a class="res-card" href="https://github.com/Gloria3513/safe-smartact/blob/main/docs/stop5_video_scripts.md" target="_blank">
+      <div class="icon">🎬</div>
+      <div>
+        <div class="t">영상 스크립트 (30초·3분·60초)</div>
+        <div class="d">숏폼·강의·가족 영상편지 + 시리즈 8편 캘린더</div>
+      </div>
+      <div class="arr">↗</div>
+    </a>
+    <a class="res-card" href="https://github.com/Gloria3513/safe-smartact/blob/main/docs/stop5_card_news_10.md" target="_blank">
+      <div class="icon">🎨</div>
+      <div>
+        <div class="t">SNS 카드뉴스 10장 마스터</div>
+        <div class="d">카카오톡·인스타·페이스북 배포용 시안</div>
+      </div>
+      <div class="arr">↗</div>
+    </a>
+  </div>
+
+  <h2><span class="num">🖨️</span>인쇄 자산</h2>
+
+  <div class="grid">
+    <a class="res-card" href="/assets/stop5_poster.html" target="_blank">
+      <div class="icon">📄</div>
+      <div>
+        <div class="t">A3 포스터</div>
+        <div class="d">복지관·경로당 게시용 (브라우저 인쇄 → A3)</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="res-card" href="/assets/stop5_pledge_card.html" target="_blank">
+      <div class="icon">💳</div>
+      <div>
+        <div class="t">멈춤 서약 카드 (명함 양면)</div>
+        <div class="d">지갑에 넣고 다니는 5단계 + 우리집 암호 빈칸</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+  </div>
+
+  <h2><span class="num">🎯</span>체험·연습</h2>
+
+  <div class="grid">
+    <a class="res-card" href="/simulator.html">
+      <div class="icon">📞</div>
+      <div>
+        <div class="t">사기 시뮬레이터</div>
+        <div class="d">전화·문자·카톡 사기를 안전하게 체험</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+    <a class="res-card" href="/">
+      <div class="icon">🛡️</div>
+      <div>
+        <div class="t">멈춤 5초 학습</div>
+        <div class="d">5단계를 처음부터 배우는 메인 페이지</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+  </div>
+
+  <footer>
+    © 스마택트 · stopcall.kr · 디지털포용법 기반 시니어 사이버안전 교육<br>
+    🆘 신고 — 112 경찰 · 118 KISA · 1332 금감원
+  </footer>
+
+</main>
+</body>
+</html>
