@@ -40,20 +40,19 @@
     margin-top: 8px;
   }
 
-  /* A4 시트 안에 90×55mm 명함 카드 4세트 (앞·뒤 × 2쌍) */
+  /* A4 시트 안에 88×54mm 명함 카드 4세트 (앞·뒤 × 2쌍) */
   .sheet {
     width: 186mm;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 90mm 90mm;
+    grid-template-columns: 88mm 88mm;
+    justify-content: center;
     grid-gap: 6mm;
-    background: white;
-    padding: 6mm;
   }
 
   .card {
-    width: 90mm;
-    height: 55mm;
+    width: 88mm;
+    height: 54mm;
     overflow: hidden;
     position: relative;
     border-radius: 3mm;
