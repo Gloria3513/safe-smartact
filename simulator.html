@@ -8,7 +8,10 @@
 <meta property="og:title" content="멈춤연습 · stopcall.kr">
 <meta property="og:description" content="전화·문자·카톡 사기를 안전한 환경에서 체험해보세요.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://stopcall.kr">
+<meta property="og:url" content="https://stopcall.kr/simulator.html">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
 <style>
   :root {
     --bg: #f7f4ee;
@@ -417,6 +420,12 @@
     e.preventDefault();
     alert('멈춤연습(stopcall.kr)은 스마택트가 만든 시니어 사이버안전 교육 서비스입니다.\n모든 시나리오는 가짜이며 진짜 돈이 오가지 않습니다.\n문의: hello@stopcall.kr');
   });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
 </script>
 </body>
 </html>

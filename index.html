@@ -7,7 +7,10 @@
 <meta name="description" content="시니어 사이버안전 핵심 루틴. 멈춰, 의심, 확인, 끊고, 알려. 손가락 5개로 외우는 5초 멈춤.">
 <meta property="og:title" content="멈춤 5초 — 5초가 평생을 지킵니다">
 <meta property="og:description" content="멈춰, 의심, 확인, 끊고, 알려. 손가락 5개로 외우는 시니어 사이버안전.">
-<meta property="og:url" content="https://stopcall.kr/stop5">
+<meta property="og:url" content="https://stopcall.kr/">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
 <style>
   :root {
     --bg: #f7f4ee;
@@ -512,6 +515,14 @@
   }
   function downloadCard() {
     window.open('/assets/stop5_pledge_card.html', '_blank');
+  }
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
   }
 </script>
 

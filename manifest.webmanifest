@@ -1,0 +1,50 @@
+{
+  "name": "멈춤연습 — 시니어 사이버안전",
+  "short_name": "멈춤연습",
+  "description": "5초가 평생을 지킵니다. 멈춰·의심·확인·끊고·알려.",
+  "start_url": "/?src=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f4ee",
+  "theme_color": "#1a1a1a",
+  "lang": "ko",
+  "dir": "ltr",
+  "categories": ["education", "lifestyle", "social"],
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "활동북 9장",
+      "short_name": "활동북",
+      "description": "사기의 9가지 얼굴 — 활동북 목차",
+      "url": "/library.html",
+      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "사기 시뮬레이터",
+      "short_name": "시뮬레이터",
+      "description": "안전한 환경에서 사기 체험",
+      "url": "/simulator.html",
+      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

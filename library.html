@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>자료실 · 멈춤연습</title>
 <meta name="description" content="활동북 9장, 강사 자료, 인쇄 자산 — 멈춤연습 자료실">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
 <style>
   :root {
     --bg: #f7f4ee;
@@ -355,5 +358,13 @@
   </footer>
 
 </main>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+</script>
 </body>
 </html>

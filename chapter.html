@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>활동북 · 멈춤연습</title>
 <meta name="description" content="속지 않는 하루 — 시니어 사이버안전 활동북 9장 시리즈">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
 <style>
   :root {
     --bg: #f7f4ee;
@@ -236,6 +239,14 @@
       .catch(e => {
         content.innerHTML = `<div class="error">불러오기 실패 (${e.message}).<br>경로: <code>${meta.file}</code></div>`;
       });
+  }
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
   }
 </script>
 </body>

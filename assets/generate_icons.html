@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>멈춤연습 아이콘 생성기</title>
+<style>
+  body {
+    font-family: "Pretendard", -apple-system, "Noto Sans KR", sans-serif;
+    background: #f7f4ee;
+    padding: 30px 20px;
+    text-align: center;
+    color: #1a1a1a;
+  }
+  h1 { font-size: 26px; margin-bottom: 8px; }
+  p { color: #555; font-size: 16px; max-width: 560px; margin: 8px auto; line-height: 1.6; }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;
+  }
+  .item {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  }
+  .item canvas {
+    display: block;
+    width: 192px;
+    height: 192px;
+    border-radius: 12px;
+  }
+  .item .label { font-size: 14px; font-weight: 700; margin-top: 10px; }
+  .item .size { font-size: 12px; color: #888; }
+  button {
+    background: #1a1a1a;
+    color: white;
+    border: 0;
+    padding: 14px 26px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 6px;
+  }
+  button:hover { background: #333; }
+  .note {
+    background: #fffbe6;
+    border-left: 5px solid #ffb300;
+    padding: 14px 18px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🛡️ 멈춤연습 아이콘 생성기</h1>
+<p>아래 미리보기를 확인하고 <b>"3개 PNG 다운로드"</b> 버튼을 누르면<br>
+icon-192.png · icon-512.png · icon-512-maskable.png 가 자동 저장됩니다.</p>
+
+<div class="grid">
+  <div class="item">
+    <canvas id="c192" width="192" height="192"></canvas>
+    <div class="label">icon-192.png</div>
+    <div class="size">192 × 192</div>
+  </div>
+  <div class="item">
+    <canvas id="c512" width="512" height="512" style="width:192px;height:192px"></canvas>
+    <div class="label">icon-512.png</div>
+    <div class="size">512 × 512</div>
+  </div>
+  <div class="item">
+    <canvas id="c512m" width="512" height="512" style="width:192px;height:192px"></canvas>
+    <div class="label">icon-512-maskable.png</div>
+    <div class="size">512 × 512 · 안전영역 80%</div>
+  </div>
+</div>
+
+<button onclick="downloadAll()">⬇ 3개 PNG 다운로드</button>
+
+<div class="note">
+  <b>다운로드 후</b><br>
+  3개 파일을 <code>safe-smartact/assets/</code> 폴더에 그대로 넣고 git에 add·commit·push 하면 PWA 아이콘이 적용됩니다.<br>
+  맥에서는 보통 <code>~/Downloads</code>에 저장됩니다.
+</div>
+
+<script>
+  // ───── 아이콘 그리기 ─────
+  function drawIcon(canvas, size, maskable) {
+    const ctx = canvas.getContext('2d');
+    const safe = maskable ? 0.8 : 1.0;          // maskable은 80% 안전영역
+    const inset = (size * (1 - safe)) / 2;
+    const drawSize = size * safe;
+
+    // 배경 (전체)
+    ctx.fillStyle = '#1a1a1a';
+    if (maskable) {
+      ctx.fillRect(0, 0, size, size);
+    } else {
+      // 라운드 사각
+      const r = size * 0.18;
+      ctx.beginPath();
+      ctx.moveTo(r, 0);
+      ctx.lineTo(size - r, 0);
+      ctx.quadraticCurveTo(size, 0, size, r);
+      ctx.lineTo(size, size - r);
+      ctx.quadraticCurveTo(size, size, size - r, size);
+      ctx.lineTo(r, size);
+      ctx.quadraticCurveTo(0, size, 0, size - r);
+      ctx.lineTo(0, r);
+      ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // 안전영역 안쪽 그라디언트
+    const grad = ctx.createLinearGradient(inset, inset, inset + drawSize, inset + drawSize);
+    grad.addColorStop(0, '#1a1a1a');
+    grad.addColorStop(1, '#2a2a2a');
+    ctx.fillStyle = grad;
+    ctx.fillRect(inset, inset, drawSize, drawSize);
+
+    // 큰 "5" 숫자
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `900 ${drawSize * 0.62}px "Pretendard", -apple-system, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const cx = size / 2;
+    const cy = size / 2 - drawSize * 0.06;
+    ctx.fillText('5', cx, cy);
+
+    // 5 옆에 "초" 작게 (살구 포인트)
+    ctx.fillStyle = '#F4A261';
+    ctx.font = `700 ${drawSize * 0.16}px "Pretendard", -apple-system, sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.fillText('초', cx + drawSize * 0.22, cy + drawSize * 0.18);
+
+    // 하단 5색 점
+    const colors = ['#E63946', '#F4A261', '#1F6FEB', '#2E7D32', '#6A4C93'];
+    const dotR = drawSize * 0.038;
+    const dotGap = drawSize * 0.11;
+    const totalW = dotGap * 4;
+    const startX = cx - totalW / 2;
+    const dotY = inset + drawSize * 0.84;
+    colors.forEach((c, i) => {
+      ctx.fillStyle = c;
+      ctx.beginPath();
+      ctx.arc(startX + dotGap * i, dotY, dotR, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  drawIcon(document.getElementById('c192'), 192, false);
+  drawIcon(document.getElementById('c512'), 512, false);
+  drawIcon(document.getElementById('c512m'), 512, true);
+
+  // ───── 다운로드 ─────
+  function download(canvas, name) {
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => { URL.revokeObjectURL(url); resolve(); }, 100);
+      }, 'image/png');
+    });
+  }
+
+  async function downloadAll() {
+    await download(document.getElementById('c192'),  'icon-192.png');
+    await download(document.getElementById('c512'),  'icon-512.png');
+    await download(document.getElementById('c512m'), 'icon-512-maskable.png');
+    alert('3개 파일이 다운로드 폴더에 저장됐어요.\n\nsafe-smartact/assets/ 폴더로 옮기고 git push 해주세요.');
+  }
+</script>
+</body>
+</html>
