@@ -59,13 +59,14 @@
     page-break-inside: avoid;
   }
 
-  /* ───── 앞면 ───── */
+  /* ───── 앞면 (인쇄 잉크 절약: 흰 배경) ───── */
   .front {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-    color: #fff;
+    background: #ffffff;
+    color: #1a1a1a;
     padding: 5mm 6mm;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    border: 0.4mm solid #e0dccf;
   }
   .front .top {
     display: flex;
@@ -75,13 +76,13 @@
     color: #888;
     letter-spacing: 0.15em;
   }
-  .front .top .brand strong { color: #fff; font-weight: 800; }
+  .front .top .brand strong { color: #1a1a1a; font-weight: 800; }
   .front .top .url {
-    background: rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.05);
     padding: 1mm 2.5mm;
     border-radius: 99px;
     font-size: 6.5pt;
-    color: #ccc;
+    color: #666;
   }
   .front .center {
     display: grid;
@@ -97,12 +98,12 @@
     letter-spacing: -0.01em;
   }
   .front .big em {
-    color: #F4A261;
+    color: #E63946;
     font-style: normal;
   }
   .front .sub {
     font-size: 7pt;
-    color: #aaa;
+    color: #777;
     margin-top: 1mm;
     letter-spacing: 0.02em;
   }

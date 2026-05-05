@@ -16,10 +16,12 @@
     height: 420mm;
     background: #f7f4ee;
     margin: 0 auto;
-    padding: 30mm 25mm;
+    padding: 25mm 22mm;
     color: #1a1a1a;
     position: relative;
     box-shadow: 0 0 30px rgba(0,0,0,.2);
+    display: flex;
+    flex-direction: column;
   }
   @media print {
     body { background: white; padding: 0; }
@@ -33,55 +35,55 @@
   }
   .brand strong { color: #1a1a1a; font-weight: 800; }
   h1 {
-    font-size: 88pt;
+    font-size: 76pt;
     line-height: 0.95;
     font-weight: 900;
     letter-spacing: -0.03em;
-    margin-bottom: 6mm;
+    margin-bottom: 5mm;
   }
   .sub {
-    font-size: 24pt;
+    font-size: 22pt;
     color: #555;
     font-weight: 600;
-    margin-bottom: 14mm;
+    margin-bottom: 10mm;
     line-height: 1.3;
   }
   .steps {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 8mm;
-    margin-bottom: 14mm;
+    gap: 6mm;
+    margin-bottom: 10mm;
   }
   .step {
     display: grid;
-    grid-template-columns: 22mm 1fr 60mm;
+    grid-template-columns: 20mm 1fr 60mm;
     align-items: center;
-    gap: 8mm;
-    padding: 10mm 8mm;
+    gap: 6mm;
+    padding: 7mm 7mm;
     background: white;
-    border-radius: 6mm;
-    border-left: 8mm solid;
+    border-radius: 5mm;
+    border-left: 6mm solid;
   }
   .step .num {
-    font-size: 60pt;
+    font-size: 48pt;
     font-weight: 900;
     line-height: 1;
     text-align: center;
   }
   .step .label {
-    font-size: 38pt;
+    font-size: 32pt;
     font-weight: 900;
     line-height: 1.1;
   }
   .step .label small {
     display: block;
-    font-size: 16pt;
+    font-size: 14pt;
     color: #666;
     font-weight: 500;
-    margin-top: 2mm;
+    margin-top: 1.5mm;
   }
   .step .line {
-    font-size: 18pt;
+    font-size: 16pt;
     color: #333;
     line-height: 1.4;
     font-weight: 600;
@@ -98,16 +100,17 @@
   .s5 .num { color: #6A4C93; }
 
   .chant {
-    background: #1a1a1a;
-    color: white;
-    padding: 14mm 10mm;
-    border-radius: 6mm;
+    background: white;
+    color: #1a1a1a;
+    padding: 10mm 8mm;
+    border-radius: 5mm;
     text-align: center;
-    margin-bottom: 10mm;
+    margin-bottom: 8mm;
+    border: 4pt solid #1a1a1a;
   }
-  .chant .small { font-size: 16pt; opacity: 0.7; margin-bottom: 4mm; }
+  .chant .small { font-size: 14pt; color: #666; margin-bottom: 3mm; }
   .chant .big {
-    font-size: 44pt;
+    font-size: 36pt;
     font-weight: 900;
     letter-spacing: 0.05em;
   }
@@ -116,7 +119,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 4mm;
-    margin-bottom: 10mm;
+    margin-bottom: 8mm;
   }
   .signal {
     background: #fff;
@@ -139,15 +142,14 @@
   }
 
   .footer {
-    position: absolute;
-    bottom: 18mm;
-    left: 25mm;
-    right: 25mm;
+    margin-top: auto;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     font-size: 13pt;
     color: #555;
+    padding-top: 6mm;
+    border-top: 1pt solid #ccc;
   }
   .footer .quote {
     font-size: 16pt;
